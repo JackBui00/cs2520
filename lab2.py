@@ -25,17 +25,18 @@ Average = 2.0
 #Part A 
 
 sum = 0 
-for x in range(20):
+for x in range(21):
     sum = sum + x 
+    print(x)
 print(sum)
 #output
 '''
-190
+210
 '''
 
 #Part B 
-#while(True):
-   # print("Infinite While Loop")
+while(True):
+    print("Infinite While Loop")
 #output
 '''
 Infinite While Loop
@@ -135,7 +136,7 @@ Input Height: 71inches
 The BMI of 18.13 is considered underweight.
 '''
 
-#Lab 2 - Task 3
+#Lab 2 - Task 4
 #This program is an algorithm that interates to calculate the squareroot
 import math 
 
@@ -145,7 +146,7 @@ def find_square_root(guess,counter):
         counter += 1
         find_square_root(new_check, counter)
 
-    
+
     print("answer found after " + str(counter) + " interations!")
     print(round(new_check,3))
     exit()
