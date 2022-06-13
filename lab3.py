@@ -81,15 +81,32 @@ def main():
     print(output_without_whitespace(user_input_one))
     user_input_two = str(input("\nEnter the phrase that you want an acronym for: "))
     print(get_acronym(user_input_two))
+    
+if __name__ == "__main__":
+    main()
 
-main()
 #output
 '''
+#output 1
 Enter the first sentence to remove all the white space: The only thing we have to fear is fear itself.
 Theonlythingwehavetofearisfearitself.
 
 Enter the phrase that you want an acronym for: random access memory
 RAM
+
+#output 2
+Enter the first sentence to remove all the white space: one many things to be done there that 
+onemanythingstobedonetherethat
+
+Enter the phrase that you want an acronym for: one too many thigs
+OTMT
+
+#output 3
+Enter the first sentence to remove all the white space: a big dog and a big cat are running around
+abigdogandabigcatarerunningaround
+
+Enter the phrase that you want an acronym for: central processing unit
+CPU
 '''
 
 #Lab 3 – Task 3
