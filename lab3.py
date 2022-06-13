@@ -102,7 +102,7 @@ def take_barcode():
     barcode = barcode.replace('-','')
     return barcode
 
-#Splices and creates a list of the zipcode values, including the check_sum value to the end 
+#Splices and creates a list of the zipcode values, including the check_sum value to the end, returns list 
 def check_sum(barcode):
     barcode_breakdown=[]
     for integer in barcode:
@@ -114,20 +114,23 @@ def check_sum(barcode):
 def print_barcode_main(barcode_breakdown):
     key =[[1,1,0,0,0],[0,0,0,1,1],[0,0,1,0,1],[0,0,1,1,0],[0,1,0,0,1],[0,1,0,1,0],[0,1,1,0,0],[1,0,0,0,1],[1,0,0,1,0],[1,0,1,0,0]]
     dp.print_start()
+    #loop though the zipcode + sum check 
     for value in barcode_breakdown:
+        #loop through the list inside the key list to complete the correct code commands for the zip integer value 
         for value_two in key[value]:
             if value_two == 0:
                 dp.print_zero()
             else:
                 dp.print_one()
     dp.print_end()
+    return None 
 
 print_barcode_main(check_sum(take_barcode()))
-print_barcode_main(check_sum(take_barcode()))
 
-
-
-
+#output
+'''
+output is in the pdf files named after the zip input
+'''
         
 
 
