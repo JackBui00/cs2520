@@ -57,25 +57,33 @@ SyntaxError: positional argument follows keyword argument
 #Lab 3 – Task 2
 
 #This function is output_without_whitespace(), takes a string and prints without spaces(white space)
+
 import re 
-def output_without_whitespace(String):
+def output_without_whitespace(String = "This is a test case for the remove of the white spaces.\n"):
     String = re.split(' ', String)
-
+    final_result_one = ''
+    print(String)
     for x in String:
-        print(str(x), end= '')
-    return None
-#This function will create an acryonym of the phrase
-def get_acronym(String2):
-    String2 = re.split(' ', String2)
+        final_result_one = final_result_one + str(x)
+        #print(str(x), end= '')
+    return final_result_one
 
+#This function will create an acryonym of the phrase
+def get_acronym(String2 = "This is another test of the things that can happen with it."):
+    String2 = re.split(' ', String2)
+    final_result_two = ''
     for y in String2:
-        print(str(y[0]), end='')
-    return None
+        final_result_two = final_result_two + str(y[0])
+        #print(str(y[0]), end='')
+    return final_result_two
 
 def main():
-    output_without_whitespace("This is a test case for the remove of the white spaces.")
-    output_without_whitespace("This is another test of the things that can happen with it")
+    user_input_one = str(input("\nEnter the first sentence to remove all the white space: "))
+    print(output_without_whitespace(user_input_one))
+    user_input_two = str(input("\nEnter the phrase that you want an acronym for: "))
+    print(get_acronym(user_input_two))
 
+main()
 
 
 
