@@ -1,4 +1,5 @@
 import turtle as t
+#print begin barcode 
 def print_start():
     t.up()
     t.setpos(-250,0)
@@ -8,7 +9,7 @@ def print_start():
     t.forward(20)
     t.backward(20)
     t.right(90)
-
+#print end of barcode
 def print_end():
     t.up()
     t.forward(10)
@@ -17,8 +18,7 @@ def print_end():
     t.forward(20)
     t.backward(20)
     t.exitonclick()
-    t.clear()
-    t.reset()
+
 
 def print_zero():
     #t.speed(5)
