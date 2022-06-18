@@ -147,19 +147,19 @@ def update(db, key, new_value):
     if key in db.keys():
         db[key] = new_value
     else:
-        print("Thrown Error")
+        print("Thrown Error, key does not exist")
     return
      
 
 def main():
     pwdDB = {'ted' : 'xxx', 'jan' : 123, 'kay' : '13yy'}
     print(pwdDB)
-    #update(pwdDB, 'ted', 'new value')
+    update(pwdDB, 'ted', 'new value')
     update(pwdDB, 'wade', 'new value 2')
 	#now, call update() function to update the pwdDB 
 	#print(db)	#any change made to db? 
     print(pwdDB)
-main()
+#main()
 #output
 '''
 #output 1
@@ -167,6 +167,31 @@ main()
 {'ted': 'new value', 'jan': 123, 'kay': '13yy'}
 
 #output 2
-
-
+{'ted': 'xxx', 'jan': 123, 'kay': '13yy'}
+Thrown Error, key does not exist
+{'ted': 'xxx', 'jan': 123, 'kay': '13yy'}
 '''
+
+#Lab 4 – Task 3
+
+#part A 
+
+#Create a set from a list
+L = [1, 4, 9, 4, 7, 2, 2, 9]
+S = set(L)
+print(S)
+print("The size is " + str(len(S)))
+#output
+'''
+{1, 2, 4, 7, 9}
+The size is 5
+'''
+
+#part B
+
+S1 = {0, 1, 1, 2, 3, 5, 8, 13, 21, 34}
+S2 = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29}
+print(S1.union(S2))
+print(S1.intersection(S2))
+print(S1.symmetric_difference(S2))
+
