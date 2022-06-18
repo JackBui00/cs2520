@@ -2,7 +2,6 @@
 
 #Lab 4 – Task 1
 
-
 #part A 
 
 #Create list, user input 
@@ -63,6 +62,8 @@ def random_list():
 '''
 
 #part C 
+
+#return list with prime values within the set parameter 
 def prime_value_list(start, end):
     L3 = []
     i = start
@@ -85,7 +86,7 @@ def prime_value_list(start, end):
 '''
 
 #part d 
-import re 
+#find vowels of the string
 def find_vowels():
     vowel = ["a","e","i","o",'u']
     user_input = input("Enter a string to check for vowels: ").replace(' ', '')
@@ -112,5 +113,12 @@ Enter a string to check for vowels: How many vowels are in this string
 ('h', 'o', 'w', 'm', 'a', 'n', 'y', 'v', 'o', 'w', 'e', 'l', 's', 'a', 'r', 'e', 'i', 'n', 't', 'h', 'i', 's', 's', 't', 'r', 'i', 'n', 'g')
 9
 '''
+
+
+#Lab 4 – Task 2
+
+#part A 
+
+stuff = {'name': 'Zed', 'age': 39, 'height': 6 * 12 + 2, 1: 'wow', 20 : [3, 4, 5], (1, 2) : ['hi', 'bye']}
 
 
