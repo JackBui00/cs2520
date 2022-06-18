@@ -100,7 +100,7 @@ def find_vowels():
             amount_of_vowel += 1
     print(L4)
     return amount_of_vowel
-print(find_vowels())
+#print(find_vowels())
 #output
 '''
 #output 1
@@ -120,5 +120,53 @@ Enter a string to check for vowels: How many vowels are in this string
 #part A 
 
 stuff = {'name': 'Zed', 'age': 39, 'height': 6 * 12 + 2, 1: 'wow', 20 : [3, 4, 5], (1, 2) : ['hi', 'bye']}
+stuff[2520] = 'cpp'
+print(stuff)
+#output
+'''
+{'name': 'Zed', 'age': 39, 'height': 74, 1: 'wow', 20: [3, 4, 5], (1, 2): ['hi', 'bye'], 2520: 'cpp'}
+'''
+
+#part B 
+favoriteFoods = {"Peg": "burgers", "Cy": "hotdogs", "Bob": "apple pie","James": "oranges","Arthur": "sandwich"}
+
+for names in favoriteFoods:
+    print(names + " Chooses " + favoriteFoods[names])
+#output
+'''
+Peg Chooses burgers
+Cy Chooses hotdogs
+Bob Chooses apple pie
+James Chooses oranges
+Arthur Chooses sandwich
+'''
+
+#part C
+
+def update(db, key, new_value):
+    if key in db.keys():
+        db[key] = new_value
+    else:
+        print("Thrown Error")
+    return
+     
+
+def main():
+    pwdDB = {'ted' : 'xxx', 'jan' : 123, 'kay' : '13yy'}
+    print(pwdDB)
+    #update(pwdDB, 'ted', 'new value')
+    update(pwdDB, 'wade', 'new value 2')
+	#now, call update() function to update the pwdDB 
+	#print(db)	#any change made to db? 
+    print(pwdDB)
+main()
+#output
+'''
+#output 1
+{'ted': 'xxx', 'jan': 123, 'kay': '13yy'}
+{'ted': 'new value', 'jan': 123, 'kay': '13yy'}
+
+#output 2
 
 
+'''
