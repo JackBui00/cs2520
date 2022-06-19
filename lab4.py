@@ -1,4 +1,4 @@
-#Name: Jack Bui 
+#Name: Betty Bui 
 
 #Lab 4 – Task 1
 
@@ -128,7 +128,7 @@ print(stuff)
 '''
 
 #part B 
-favoriteFoods = {"Peg": "burgers", "Cy": "hotdogs", "Bob": "apple pie","James": "oranges","Arthur": "sandwich"}
+favoriteFoods = {"Peg": "burgers", "Cy": "hotdogs", "Bob": "apple pie","Kim": "oranges","Arthur": "sandwich"}
 
 for names in favoriteFoods:
     print(names + " Chooses " + favoriteFoods[names])
@@ -137,7 +137,7 @@ for names in favoriteFoods:
 Peg Chooses burgers
 Cy Chooses hotdogs
 Bob Chooses apple pie
-James Chooses oranges
+Kim Chooses oranges
 Arthur Chooses sandwich
 '''
 
@@ -194,4 +194,185 @@ S2 = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29}
 print(S1.union(S2))
 print(S1.intersection(S2))
 print(S1.symmetric_difference(S2))
+#output
+'''
+{0, 1, 2, 3, 5, 7, 8, 11, 13, 17, 19, 21, 23, 29, 34} #Union 
+{13, 2, 3, 5} #Intersection 
+{0, 1, 34, 7, 8, 11, 17, 19, 21, 23, 29} # Symmetric Difference 
+'''
 
+
+#Lab 4 – Task 4
+
+#part A 
+
+#Create two list of Username + Password
+from cryptography.fernet import Fernet
+
+#names = [] #uncomment to enter each name and password individually 
+#password = [] #uncomment {“Jesse” : “x11yz”, “Alex” : “hizzpp”
+names = ["Jesse","Alex", "Betty", "Kim", "Jose", "Jones", "Jasmine"]   #Test names #comment out if using manual input 
+password = ["x11yz","hizzpp", "1234","Kim", "password123", "burgendy", "rice"]  #Test names  #comment out if using manual input 
+
+encryption_key = Fernet.generate_key()
+
+fernet = Fernet(encryption_key)
+
+#Ecrypt the password of dictionary 
+def encrypt(target):
+    for v in target.keys():
+        target[v] = fernet.encrypt(target[v].encode())
+    return target
+
+#decrypt the password of dictionary 
+def decrypt(target):
+    for v in target.keys():
+        target[v] = fernet.decrypt(target[v]).decode()
+    return target
+#print(encrypt(password))
+
+#Take in user name and password individually 
+def new_user():
+    names.append(input("Enter your name: "))
+    password.append(input("Input your password: "))
+i = 0
+
+#Enter each username by hand if wanted
+#while i < 5: 
+    #new_user()
+    #i += 1
+
+#zip password and username list into dictionary 
+user_name_dict = dict(zip(names,password))
+print(user_name_dict) #print decrypted 
+user_name_dict = encrypt(user_name_dict)
+print(user_name_dict) #Print ecrypted 
+#output 
+'''
+{'Betty': '1234', 'Kim': 'Kim', 'Jose': 'password123', 'Jones': 'burgendy', 'Jasmine': 'rice'}
+'''
+
+def login():
+    i = 0
+    user_name_input = input("Enter your username: ")
+    if user_name_input in user_name_dict.keys():
+        while i < 3:
+            password_input = input("Enter your password: ")
+            if password_input == fernet.decrypt(user_name_dict[user_name_input]).decode():
+                print("You have logged in!")
+                request_change_pass = input("Do you want to change password? (Yes or No): ").lower()
+                if request_change_pass == "yes":
+                    change_password(user_name_input)
+                    break
+                else:
+                    break
+            elif password_input == "0":
+                break
+            else: 
+                print("Wrong password, try again")
+                i += 1
+                print( str(i) + " Wrong try")     
+        print("You failed all 3 times!")  
+        login()
+    elif user_name_input == "0":
+        return
+    else:  
+        login()
+
+def change_password(user_name):
+    unenrypted_password = str(input("Enter a new password: "))
+    encrypted_password = fernet.encrypt(unenrypted_password.encode())
+    user_name_dict[user_name] = encrypted_password
+
+login()
+login()
+#print(decrypt(user_name_dict)) #print decrypted with new password change 
+user_name_dict = decrypt(user_name_dict)
+print(user_name_dict)
+user_name_dict = encrypt(user_name_dict)
+print(user_name_dict)
+#print(user_name_dict)
+#print(encrypt(user_name_dict)) #print encrypted username and password dictionary 
+#output
+'''
+#Dictionary unecrypted, Unchanged without password edit by user 
+{'Jesse': 'x11yz', 'Alex': 'hizzpp', 'Betty': '1234', 'Kim': 'Kim',
+ 'Jose': 'password123', 'Jones': 'burgendy', 'Jasmine': 'rice'}
+
+#Dictionary password Encrypted
+{'Jesse': b'gAAAAABirmeyUucmCG6gs0UCC7WFZhNOi3wUZWdFuGOSEwMojF43SHmfLxMUW1qeITk8VmQGaqedbGnlEysQvKSMPhA0S59jig==',
+'Alex': b'gAAAAABirmeyclhhZYdFCM9YMHQRgX1nwe-UJqOLlt1TfhCSvlp1FC6Xf36C3s-C7Y4JieOBQ6P-lbKj7nKuDfzYewUhZF0c6A==',
+'Betty': b'gAAAAABirmeyB28HwY1UZyLE3AwmH2kPEEhXMH9IrU7BAzyfSo2ZKkrbAPuGhaoY3PWj_Vegw4fQoKgGMpluqzUijyjFcaavHg==',
+'Kim': b'gAAAAABirmeyVElEkTfym4GW7obxSeZllV4-e-iDbfl4wLr53yEeWMP32Fjslc2J1rl-9-WtI1Xe3kudy0E7GcYsRl_IR3e4lg==',
+'Jose': b'gAAAAABirmeyznZufEYiD35qCnB941EqguOgDkQ3kxiK8-D2CAIoz96_Fo3rnQiOZAlej0VGRbWubNbqaVDle-f8sQMZRpk7tw==',
+'Jones': b'gAAAAABirmey_G3xa_r1fHgapIHSKoLpjg_RwXoyaUy0UHWiPOOh_W7bcSHi3IU6_brpnVdLajm6uCOS_GZVV3__19BKN4ICmQ==',
+'Jasmine': b'gAAAAABirmeyJQVvJtaOoNHIX82b-RoDUQSoPDWeEIxAYfQrXWcx5eCZ-AFoRWdSR5OR-AII4CzOGK0iWGsVk6LwTbORISBcZg=='}
+
+#Login First try 
+Enter your username: Jesse
+Enter your password: x11yz
+You have logged in!
+
+#Login 3rd try 
+Enter your username: Jesse
+Enter your password: 1234
+Wrong password, try again
+1 Wrong try
+Enter your password: 1234
+Wrong password, try again
+2 Wrong try
+Enter your password: x11yz
+You have logged in!
+
+#Failed Login 3 times 
+Enter your username: Jesse
+Enter your password: 1234
+Wrong password, try again
+1 Wrong try
+Enter your password: hello
+Wrong password, try again
+2 Wrong try
+Enter your password: potato
+Wrong password, try again
+3 Wrong try
+You failed all 3 times!
+Enter your username:
+
+#Login user, change password
+Enter your username: Jesse
+Enter your password: x11yz
+You have logged in!
+Do you want to change password? (Yes or No): yes
+Enter a new password: corn
+
+
+#Input to change password 
+Enter your username: Jesse
+Enter your password: x11yz
+You have logged in!
+Do you want to change password? (Yes or No): yes
+Enter a new password: corn
+Enter your username: Alex
+Enter your password: hizzpp
+You have logged in!
+Do you want to change password? (Yes or No): yes
+Enter a new password: purpleflower
+Enter your username: 0
+Enter your username: 0
+
+#Dictionary with new passwords unecrypted 
+{'Jesse': 'corn', 'Alex': 'purpleflower', 'Betty': '1234', 'Kim': 'Kim',
+'Jose': 'password123', 'Jones': 'burgendy', 'Jasmine': 'rice'
+
+#Dictionary with new password encrypted
+{'Jesse': b'gAAAAABirm_C_T-Y54pTy-cV_wClW-v0VgisvfNLr3xyAC0ueNVo0L5GnLVSzsqftacSptQyltzVcEDgmftKFbTtJfSny_iG4w==', 
+'Alex': b'gAAAAABirm_CSFlQ4heoKmbRHOSn6C7KaI0lCUDGmCeI-uevcS5RUAgq-BYAdp1VxJlThz-_jIy6dcNo9NraQy3KR3JXLsxO9A==', 
+'Betty': b'gAAAAABirm_CozCGYNqHIeir-8TrFQ7kmQdmMBZh4x_jZcZ5AaNaLP3L-Eppbx5NG7n8kaxXr2qnJLq0thtLqg10d475I_RuQg==', 
+'Kim': b'gAAAAABirm_CeguV25WSVpCuZvX35_9MCRw2Nq6w34XtYuxoy1xods1EeWrcNycAFCveQ5vRGZ1w3LLxOhIxpHdchv09-6lAyQ==', 
+'Jose': b'gAAAAABirm_CNnczLkNb06KKWpjJ8Alid9Dj_734_34DUglKQWotN1u8nfTFPmbau5EIE457_4JNbiNUPjnJLITuigDutVu1Zw==', 
+'Jones': b'gAAAAABirm_C-CUogl9QoPFaV2jhidNz_kwbg4jV5cEWHCya7GOAsO49N7gDvzZzURJO-sdTC7IROlGMsJMGnv4jWELmFC7osg==', 
+'Jasmine': b'gAAAAABirm_CMPWOnJuurMlo6lh5WN4Bxg89Rp-4_Y9AOzQv03YU9xb0oWMGUz773JvhR75lw6uh5F_Wuuwi1r6IbYBYCrqDUg=='}
+
+
+
+'''
