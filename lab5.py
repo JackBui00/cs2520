@@ -16,11 +16,11 @@ def open_file_append(file_name):
     return target
 
 def main():
-    names_and_values = []
-    scores = open_file_read("scores.txt")
-    for line in scores:
-        names_and_values.append(line.split())
-    print(names_and_values)
-
+    names_and_values_list = []
+    names_and_values = open_file_read("scores.txt")
+    for line in names_and_values:
+        names_and_values_list.append(line.split())
+    print(names_and_values_list)
+    
 
 main()
