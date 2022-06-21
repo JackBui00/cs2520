@@ -21,6 +21,28 @@ def main():
     for line in names_and_values:
         names_and_values_list.append(line.split())
     print(names_and_values_list)
-    
+    new_names_and_values_list = []
+    for data in names_and_values_list:
+        total = 0
+        for x in range(1,4):
+            try:
+                total += int(data[x])
+            except ValueError:
+                try:
+                    total += float(data[x])
+                except ValueError:
+                    total += 0
+        average = round(total/3,2)
+        data.append(average)
+        new_names_and_values_list.append(data)
 
+    names_and_values.close()
+
+    print(new_names_and_values_list)
+
+    new_file_average = open_file_write("scoresAve.txt")
+    for data in new_names_and_values_list:
+            for x in data:
+                new_file_average.write(str(x) + " ")
+            new_file_average.write("\n")
 main()
