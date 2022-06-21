@@ -163,5 +163,10 @@
 0.22
 0.65
 0.43
- 
 
+Max value: 0.65
+Min value: -1.09
+Average value: -0.402
+Max value: 0.65
+Min value: -1.09
+Average value: -0.402
