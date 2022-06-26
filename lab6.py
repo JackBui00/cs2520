@@ -5,11 +5,11 @@ class   question():
     def __init__(self, dict, correct_answer):
         self.dict = dict
         self.correct_answer = correct_answer
-
-    def print_question(self):
+    
+    def print_question(self): #Interate through the dictionary and print the values 
         for key in self.dict.values():
-            print(key)
-        return self.check_answer()
+            print(key) 
+        return self.check_answer() #check if input by student object is correct
 
     def check_answer(self):
         user_input = input()
@@ -23,10 +23,10 @@ class test():
         self.list = list
 
     def take_test(self, student):
-        print("\nWelcome to the test", student.name)
-        for dictionary in self.list:
+        print("\nWelcome to the test", student.name) #welcome message 
+        for dictionary in self.list: #Loop through the list of dictionary questions to print the question and check answer
             if dictionary.print_question() == True:
-                student.correct()
+                student.correct() #add 1 to the score of the student if their answer is correct 
 
 
 class   student():
@@ -36,16 +36,16 @@ class   student():
         self.id = id
         self.test_score = test_score
 
-    def print_values(self):
+    def print_values(self): #print values of the student object 
         print("Name:", self.name)
         print("Age:", self.age)
         print("ID:", self.id)
         print("Test Score:", self.test_score)
     
-    def correct(self):
+    def correct(self):  #Add one to the student object 
         self.test_score += 1
     
-    def reset(self):
+    def reset(self): #reset student object total score 
         self.test_score = 0 
 
 
@@ -64,20 +64,20 @@ def main():
     q5 = question({"question": "What lab is this?", "a" : "A. 3" , "b" : "B. 1", "c" : "C. 4", "d" : "D. 6"}, "d")
 
     
-    test1 = test([q1,q2,q3,q4,q5])
+    test1 = test([q1,q2,q3,q4,q5]) #test object with selected question objects
     
-    p1 = student("jack", 13, 1234)
-    p2 = student("james", 17, 4321)
+    p1 = student("jack", 13, 1234) 
+    p2 = student("james", 17, 4321) #Three student objects 
     p3 = student("jacob", 15, 2341)
 
-    test1.take_test(p1)
-    p1.print_values()
-    test1.take_test(p2)
-    p2.print_values()
-    test1.take_test(p3)
-    p3.print_values()
+    test1.take_test(p1) #student 1 take test 
+    p1.print_values() #return student score after test
+    test1.take_test(p2)# student 2 take test 
+    p2.print_values() #return student score after test
+    test1.take_test(p3)# student 3 take test 
+    p3.print_values() #return student score after test
 
-if __name__ == "__main__":
+if __name__ == "__main__": #call main 
     main()
 
 
