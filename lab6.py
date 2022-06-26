@@ -8,11 +8,16 @@ class   question():
 
     def print_question(self):
         for key in self.dict.values():
-            print(key)  
-
-    def check_answer(self, input):
-        if input.lower() == self.correct_answer:
+            print(key)
+        return self.check_answer()
+        
+    def check_answer(self):
+        user_input = input()
+        if user_input.lower() == self.correct_answer:
             return True
+        else:
+            return False
+
 class   question1():
     question_dict = {"question" : "Where is Cal Poly Pomona located?", "a" : "A. Texas" , "b" : "B. California",
          "c" : "C. Nevada", "d" : "D. Washington"}
@@ -34,9 +39,15 @@ class   question4():
 q1 = question({"question" : "Where is Cal Poly Pomona located?", "a" : "A. Texas" , "b" : "B. California",
          "c" : "C. Nevada", "d" : "D. Washington"}, "b")
 
-q1.print_question()
+q2 = question({"question" : "On your student records system, what does CSU stand for?", "a" : "A. California State Universities" ,
+    "b" : "B. Colorada State University", "c" : "C. Color Sparkling Unicorn", "d" : "D. Canadian Swan Upping"}, "a")
 
-print(q1.check_answer("c"))
+q3 = question({"question" : "What is 5 + 5?", "a" : "A. 23" , "b" : "B. 15", "c" : "C. -23", "d" : "D. 10"}, "d")
+
+q4 = question({"question" : "How many moons does Earth have?", "a" : "A. 32" , "b" : "B. 3", "c" : "C. 1", "d" : "D. 0"}, "c")
+
+q5 = question({"question": "What lab is this?", "a" : "A. 3" , "b" : "B. 1", "c" : "C. 4", "d" : "D. 6"}, "d")
+
 
 
 class   student():
