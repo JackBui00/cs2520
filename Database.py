@@ -26,9 +26,9 @@ def main():
         [sg.Text("Username",size = (15,1)), sg.InputText()],
         [sg.Text("Password",size = (15,1)), sg.InputText()],
         [return_statement],
-        [sg.Button("Enter"), sg.Button("Exit")]
+        [sg.Button("Enter"), sg.Button("Exit"),sg.Button("Make New User"),sg.Button("Show Password")]
     ]
-    window = sg.Window('Login Portal', layout)
+    window = sg.Window("Login Portal", layout)
 
     database = {"jack": "wordpass","james": "password123", "german": "potato"}
 
@@ -38,23 +38,23 @@ def main():
         
         event, value = window.read()
         #print( event, value)
-        if event == sg.WIN_CLOSED or event == 'Exit':
+        if event == sg.WIN_CLOSED or event == "Exit":
             break
-        if event == 'Enter':
-            if "admin" in value[0] and "password" in value[1]:
-                return_statement.update(value ="New Username and Password Created")
-                new_username = value[0].split(" ")[1]
-                new_password = value[1].split(" ")[1]
-                database[new_username] = fernet.encrypt(new_password.encode())
-            elif value[0] in database.keys():
+        if event == "Enter":
+            if value[0] in database.keys():
                 if fernet.decrypt(database[value[0]]).decode() == value[1]:
                     return_statement.update(value = "The password was correct")
             elif value[0].lower() not in database.keys() or value[1] != fernet.decrypt(database[value[0]]).decode():
                 return_statement.update(value="The Username or password you entered does not exist or is incorrect")
+        if event == "Name New User":
+            database[value[0]] = fernet.encrypt(value[1].encode())
+        if event == "Show Password":
+            return_statement.update(value = fernet.decrypt(database[value[0]]).decode())
+
         
     window.close()
     print(database)
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
 
 
