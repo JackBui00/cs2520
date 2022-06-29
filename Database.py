@@ -1,5 +1,21 @@
 import PySimpleGUI as sg
+from cryptography.fernet import Fernet
 
+encryption_key = Fernet.generate_key()
+    
+fernet = Fernet(encryption_key)
+
+#Ecrypt the password of dictionary 
+def encrypt(target):
+    for v in target.keys():
+        target[v] = fernet.encrypt(target[v].encode())
+    return target
+
+#decrypt the password of dictionary 
+def decrypt(target):
+    for v in target.keys():
+        target[v] = fernet.decrypt(target[v]).decode()
+    return target
 
 def main():
     return_statement = sg.Text()
