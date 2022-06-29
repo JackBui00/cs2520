@@ -27,15 +27,21 @@ def main():
         [sg.Button("Enter"), sg.Button("Exit")]
     ]
     window = sg.Window('Login Portal', layout)
-    database = {"jack": "password"}
+
+    database = {"jack": "password","james": "password123", "german": "potato"}
+
+    database = encrypt(database)
+
     while True:             # Event Loop
         event, value = window.read()
         #print( event, value)
         if event == sg.WIN_CLOSED or event == 'Exit':
             break
         if event == 'Enter':
-            if value[0] not in database.keys() or value[1] != database[value[0]]:
+            if value[0].lower() not in database.keys() or value[1] != fernet.decrypt(database[value[0]]).decode():
                 return_statement.update(value="The Username or password you entered does not exist or is incorrect")
+            elif fernet.decrypt(database[value[0]]).decode() == value[1]:
+                return_statement.update(value = "The password was correct")
         
     window.close()
     print(database)
