@@ -29,7 +29,7 @@ def main():
         [sg.Button("Enter"), sg.Button("Exit"),sg.Button("Make New User"),sg.Button("Forgot Password")]
     ]
     window = sg.Window("Login Portal", layout)
-
+    
     database = {"jack": "wordpass","james": "password123", "german": "potato"}
 
     database = encrypt(database)
